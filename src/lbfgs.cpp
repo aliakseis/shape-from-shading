@@ -202,7 +202,6 @@ Vecteur<double> BFGS(const Matrice &Image, Vecteur<double> &x)
         }
         Vecteur<double> q = g_k;
         // cout << "oui" << endl;
-        double rho_i = 0;
         if(k>0){
             for (int i = k - 1; i >= k - m; i--)
             {
@@ -214,7 +213,12 @@ Vecteur<double> BFGS(const Matrice &Image, Vecteur<double> &x)
                 {
                     indice = i % m;
                 }
-                rho_i = 1 / (y[indice] * s[indice]);
+                const auto coeff = y[indice] * s[indice];
+                if (coeff == 0)
+                {
+                    return x;
+                }
+                const double rho_i = 1 / coeff;
                 // cout << "oui_2" << endl;
                 alpha_k(indice + 1) = rho_i * s[indice] * q;
                 // cout << "oui_2" << endl;
@@ -243,7 +247,12 @@ Vecteur<double> BFGS(const Matrice &Image, Vecteur<double> &x)
                 {
                     indice = i % m;
                 }
-                rho_i = 1 / (y[indice] * s[indice]);
+                const auto coeff = y[indice] * s[indice];
+                if (coeff == 0)
+                {
+                    return x;
+                }
+                const double rho_i = 1 / coeff;
                 beta_k(indice + 1) = rho_i * y[indice] * z;
                 z = z + s[indice] * (alpha_k(indice + 1) - beta_k(indice + 1));
             }

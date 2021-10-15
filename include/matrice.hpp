@@ -59,6 +59,12 @@ public:
 
 	Matrice_diag();						  // Constructeur par défaut
 	Matrice_diag(int n_l, double valeur); // Constructeur avec dimension + une valeur
+    Matrice_diag(const Matrice_diag&) = delete;
+    Matrice_diag(Matrice_diag&& other) : n(other.n), val(other.val)
+    {
+        other.n = 0;
+        other.val = nullptr;
+    }
 
 	// Destructeur
 	~Matrice_diag();

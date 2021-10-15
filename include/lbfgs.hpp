@@ -20,7 +20,7 @@ const double epsilon_2 = 10e-3;
 // Définition des nombres d'itérations maximales
 
 const int i_max = 10000;
-const int i_max_Wolfe = 20;
+const int i_max_Wolfe = 200;
 
 // Définition des fonctions
 
